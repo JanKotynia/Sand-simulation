@@ -9,6 +9,7 @@ import java.util.Random;
 public class PixelPainter extends JPanel {
     private static final int WIDTH = 200;
     private static final int HEIGHT = 400;
+    public int increase =0;
     private boolean[][] pixels;
 
     public PixelPainter() {
@@ -49,14 +50,14 @@ public class PixelPainter extends JPanel {
 
     Timer timer = new Timer(8, e -> {
         Physics();
+        pilling();
         repaint();
     });
         timer.start();
 }
 
     private void Physics() {
-        Random random = new Random();
-        int r;
+
         for (int i = WIDTH - 2; i > 0; i--) {
             for (int j = HEIGHT - 2; j > 0; j--) {
                 if (pixels[i][j] && !pixels[i][j + 1]) {
@@ -67,17 +68,41 @@ public class PixelPainter extends JPanel {
             }
         }
 
+    }
+
+    private void pilling()
+    {
+        Random random = new Random();
+        int r;
+
         for (int i = WIDTH - 2; i > 0; i--) {
-            for (int j = HEIGHT - 2; j > 0; j--) {
-                if (pixels[i][j + 1] && !pixels[i + 1][j + 1] && !pixels[i - 1][j + 1]) {
+            for (int j = HEIGHT - 3; j > 0; j--) {
+            if(pixels[i][j+2] && pixels[i][j])
+            {
+                if(!pixels[i+1][j+2]&&!pixels[i-1][j+2])
+                {
                     r = random.nextInt(2) + 1;
                     pixels[i][j]=false;
-                    if (r == 1) {
-                        pixels[i + 1][j + 1] = true;
-                    } else {
-                        pixels[i - 1][j + 1] = true;
+                    if(r==1)
+                    {
+                        pixels[i+1][j+2]=true;
+                    }
+                    else
+                    {
+                        pixels[i-1][j+2]=true;
                     }
                 }
+                else if(!pixels[i+1][j+2])
+                {
+                 pixels[i][j]=false;
+                 pixels[i+1][j+2]=true;
+                }
+                else if(!pixels[i-1][j+2])
+                {
+                    pixels[i][j]=false;
+                    pixels[i-1][j+2]=true;
+                }
+            }
             }
         }
     }
@@ -89,10 +114,11 @@ public class PixelPainter extends JPanel {
         for (int x = 0; x < WIDTH; x++) {
             for (int y = 0; y < HEIGHT; y++) {
                 if (pixels[x][y]) {
-                    g.setColor(Color.BLACK);
+                    g.setColor(new Color(0,0,0));
                     g.drawLine(x, y, x, y);
                 }
             }
         }
     }
+
 }
