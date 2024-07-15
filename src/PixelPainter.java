@@ -1,7 +1,5 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Random;
@@ -11,7 +9,6 @@ public class PixelPainter extends JPanel {
     private static final int HEIGHT = 400;
     public int increase =1;
     public int[][] pixels;
-    public Timer timer;
 
     public PixelPainter() {
         pixels = new int[WIDTH][HEIGHT];
@@ -80,7 +77,7 @@ public class PixelPainter extends JPanel {
         Random random = new Random();
         int r;
 
-        for (int i = WIDTH - 2; i > 0; i--) {
+        for (int i = WIDTH - 3; i > 0; i--) {
             for (int j = HEIGHT - 3; j > 0; j--) {
             if(pixels[i][j+2] > 0 && pixels[i][j] > 0)
             {
@@ -90,7 +87,7 @@ public class PixelPainter extends JPanel {
 
                     if(r==1)
                     {
-                        pixels[i+1][j+2]=pixels[i][j];;
+                        pixels[i+1][j+2]=pixels[i][j];
                     }
                     else
                     {

@@ -1,7 +1,7 @@
 
 import javax.swing.*;
 
-public static void main(String[] args) {
+public static void main() {
         JFrame frame = new JFrame("Pixel Painter");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.add(new PixelPainter());
